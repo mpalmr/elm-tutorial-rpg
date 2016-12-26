@@ -7,5 +7,5 @@ insert_final_newline = true
 indent_size = 2
 indent_style = space
 
-[{/elm-package.json,*.elm}]
+[{elm-package.json,*.elm}]
 indent_size = 4
