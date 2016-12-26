@@ -1,58 +1,52 @@
-'use strict';
-const path = require('path');
-
-const paths = {
-  src: path.join(process.cwd(), 'src'),
-  dist: path.join(process.cwd(), 'dist'),
-};
+var path = require("path");
 
 module.exports = {
-  context: paths.src,
-  entry: path.join(paths.src, 'index.js'),
+  entry: {
+    app: [
+      './src/index.js'
+    ]
+  },
+
   output: {
-    path: paths.dist,
+    path: path.resolve(__dirname + '/dist'),
     filename: '[name].js',
   },
+
   module: {
     loaders: [
       {
-        test: /\.elm$/,
-        loader: 'elm-webpack',
-        query: {
-          verbose: true,
-          warn: true,
-        },
+        test: /\.(css|scss)$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+        ]
       },
       {
-        test: /\.s?css$/,
-        loader: 'style!css',
+        test:    /\.html$/,
+        exclude: /node_modules/,
+        loader:  'file?name=[name].[ext]',
       },
       {
-        test: /\.html$/,
-        loader: 'file',
-        query: {
-          name: '[name].[ext]',
-        },
+        test:    /\.elm$/,
+        exclude: [/elm-stuff/, /node_modules/],
+        loader:  'elm-webpack?verbose=true&warn=true',
       },
       {
-        test: /\.woff2?(\?v=(\d\.){2}\d)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          mimeType: 'application/font-woff',
-        }
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
       },
       {
-        test: /\.(ttf|eot|svg)(\?v=(\d\.){2}\d)?$/,
-        loader: 'file',
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
       },
     ],
+
     noParse: /\.elm$/,
   },
+
   devServer: {
     inline: true,
-    stats: {
-      colors: true,
-    },
+    stats: { colors: true },
   },
+
 };
