@@ -1,0 +1,15 @@
+{
+  "name": "elm-rpg",
+  "version": "0.0.0",
+  "description": "Official Elm tutorial for making an RPG game (https://www.elm-tutorial.org/en/04-starting/cover.html)",
+  "author": "Matthew Palmer <mspalmer91@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "elm",
+    "tutorial",
+    "rpg",
+    "game"
+  ]
+}
